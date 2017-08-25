@@ -3,31 +3,27 @@
 // *********************************************************************************
 
 // Require mysql
-var mysql = require("mysql");
-var connection;
+var Sequelize = require("sequelize");
 
-// Set up our connection information
+// Creates mySQL connection using Sequelize
 if (process.env.JAWSDB_URL){ 
-  connection = mysql.createConnection(process.env.JAWSDB_URL);
+  var sequelize = new Sequelize(process.env.JAWSDB_URL);
 }
-else {  
-    connection = mysql.createConnection({
+else { 
+  var sequelize = new Sequelize("nmtndbpd5rfkk1p2", "t5jb9lflrosd0iu3", "wili730s9yl2vl77", {
     port: 3306,
-    host: "cdm1s48crk8itlnr.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
-    user: "adsojitv3rohtfjj",
-    password: "pweqnpdvx60756k4",
-    database: "lwqecljbx2oh1nek"
+    host: "uc13jynhmkss3nve.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+    dialect: "mysql",
+    pool: {
+      max: 5,
+      min: 0,
+      idle: 10000
+    }
   });
 }
 
-// Connect to the database
-connection.connect(function(err) {
-  if (err) {
-    console.error("error connecting: " + err.stack);
-    return;
-  }
-  console.log("connected as id " + connection.threadId);
-});
+// Exports the connection for other files to use
+module.exports = sequelize;
 
-// Export connection
-module.exports = connection;
+
+// database: "nmtndbpd5rfkk1p2"

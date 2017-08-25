@@ -1,2 +1,2 @@
-# burger
-This is a restaurant app that lets users input the names of burgers they'd like to eat.
+# Sequelized burger
+This is a restaurant app that lets users input the names of burgers they'd like to eat using Sequelize Functionalities.
