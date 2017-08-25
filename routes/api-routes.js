@@ -36,7 +36,8 @@ module.exports = function(app) {
     });
   });
 
-  app.put("/:id", function(req, res) {
+  app.post("/:id", function(req, res) {
+    console.log(req.body);
     Burger.update(req.body,
       {
         where: {
@@ -44,6 +45,7 @@ module.exports = function(app) {
         }
       })
     .then(function(data) {
+      console.log(data);
       res.json(data);
     });
   });

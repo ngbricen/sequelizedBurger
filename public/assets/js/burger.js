@@ -68,7 +68,7 @@ $.get("/api/burgers", function(data) {
         $("#not-eaten").prepend(row);  
       }
       else{
-        $("#not-eaten").prepend(row);  
+        $("#eaten").prepend(row);  
       }
     }
   }
@@ -82,20 +82,23 @@ function flipBurger() {
   // Then, set the image's data-state to animate
   // Else set src to the data-still value
   if (state === true) {
+    state = false;
     $(this).attr("burger-devoured", false);
   } else {
   	$(this).attr("burger-devoured", true);
+    state = true;
   }
 
   var flippedBurger = {
     devoured: state,
-    updated_at: moment().format("YYYY-MM-DD HH:mm:ss")
+    date: moment().format("YYYY-MM-DD HH:mm:ss")
   };
 
   console.log(flippedBurger);
 
-
-  $.put("/" + id, flippedBurger).done(function(){});
+  $.post("/" + id, flippedBurger).done(function(){
+    window.location.href = "/";
+  });
 
 
 }
